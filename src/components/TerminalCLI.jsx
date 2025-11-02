@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import SystemMonitor from './SystemMonitor.jsx';
 
 const Divider = () => (
   <div className="h-px w-full bg-gradient-to-r from-transparent via-neutral-800 to-transparent my-4" />
@@ -6,21 +7,21 @@ const Divider = () => (
 
 const ProjectIndex = ({ onOpen }) => (
   <div className="space-y-2">
-    <div className="font-mono text-cyan-300">ls -l // PROJECT INDEX</div>
+    <div className="font-mono" style={{ color: '#FFC000', textShadow: '0 0 6px rgba(255,192,0,0.6), 0 0 10px rgba(0,255,255,0.4)'}}>ls -l // PROJECT INDEX</div>
     <ul className="font-mono text-sm space-y-2">
-      <li className="cursor-pointer text-cyan-300/90 hover:text-cyan-300" onClick={() => onOpen('001')}>
+      <li className="cursor-pointer text-cyan-300/90 hover:text-cyan-300 hover:shadow-[0_0_18px_rgba(0,255,255,0.4)] transition" onClick={() => onOpen('001')}>
         [001] &gt; DATA LOG: QUANTUM_LEAP_MODEL.25 // Status: DEPLOYED
       </li>
-      <li className="text-cyan-300/70">[002] &gt; DATA LOG: PROJECT_MINDSHARE // Status: ARCHIVED</li>
-      <li className="text-cyan-300/70">[003] &gt; DATA LOG: SYNAPTIC_BEAMFORMER // Status: INTEGRATION</li>
-      <li className="text-cyan-300/70">[004] &gt; DATA LOG: HYPERLOOP_AUDIT // Status: ARCHIVED</li>
+      <li className="text-cyan-300/70 hover:text-cyan-300 hover:shadow-[0_0_18px_rgba(0,255,255,0.4)] transition">[002] &gt; DATA LOG: PROJECT_MINDSHARE // Status: ARCHIVED</li>
+      <li className="text-cyan-300/70 hover:text-cyan-300 hover:shadow-[0_0_18px_rgba(0,255,255,0.4)] transition">[003] &gt; DATA LOG: SYNAPTIC_BEAMFORMER // Status: INTEGRATION</li>
+      <li className="text-cyan-300/70 hover:text-cyan-300 hover:shadow-[0_0_18px_rgba(0,255,255,0.4)] transition">[004] &gt; DATA LOG: HYPERLOOP_AUDIT // Status: ARCHIVED</li>
     </ul>
   </div>
 );
 
 const ProfileView = () => (
   <div className="space-y-2">
-    <div className="font-mono text-cyan-300">cat /profile.txt</div>
+    <div className="font-mono" style={{ color: '#FFC000', textShadow: '0 0 6px rgba(255,192,0,0.6), 0 0 10px rgba(0,255,255,0.4)'}}>cat /profile.txt</div>
     <p className="font-mono text-sm text-neutral-300">
       Technical Profile: Full-Stack systems engineer with specialization in LLM integration and UX strategy.
       Designs autonomous product workflows, orchestrates multi-agent reasoning layers, and builds human-in-the-loop
@@ -41,18 +42,18 @@ const ContactView = () => {
 
   return (
     <div className="space-y-3">
-      <div className="font-mono text-cyan-300">ping [{target}]</div>
+      <div className="font-mono" style={{ color: '#FFC000', textShadow: '0 0 6px rgba(255,192,0,0.6), 0 0 10px rgba(0,255,255,0.4)'}}>ping [{target}]</div>
       {!sent ? (
         <form onSubmit={submit} className="space-y-3">
           <div className="grid md:grid-cols-3 gap-3">
-            <input value={target} onChange={(e) => setTarget(e.target.value)} className="bg-black/40 border border-neutral-800/80 rounded px-3 py-2 font-mono text-xs text-neutral-200 outline-none focus:border-cyan-400/60" />
-            <input placeholder="email@domain.com" className="bg-black/40 border border-neutral-800/80 rounded px-3 py-2 font-mono text-xs text-neutral-200 outline-none focus:border-cyan-400/60" />
-            <button className="font-mono text-xs px-3 py-2 border border-cyan-400/70 rounded text-cyan-300 hover:bg-cyan-500/10 transition">[TRANSMIT]</button>
+            <input value={target} onChange={(e) => setTarget(e.target.value)} className="bg-black/40 border border-neutral-800/80 rounded px-3 py-2 font-mono text-xs text-neutral-200 outline-none focus:border-cyan-400/60 shadow-[0_0_20px_rgba(0,255,255,0.25)]" />
+            <input placeholder="email@domain.com" className="bg-black/40 border border-neutral-800/80 rounded px-3 py-2 font-mono text-xs text-neutral-200 outline-none focus:border-cyan-400/60 shadow-[0_0_20px_rgba(0,255,255,0.25)]" />
+            <button className="font-mono text-xs px-3 py-2 rounded text-black shadow-[0_0_24px_rgba(0,255,255,0.35)]" style={{ backgroundColor: '#FFC000' }}>[TRANSMIT]</button>
           </div>
-          <textarea placeholder="Message payload" rows={3} className="w-full bg-black/40 border border-neutral-800/80 rounded px-3 py-2 font-mono text-xs text-neutral-200 outline-none focus:border-cyan-400/60" />
+          <textarea placeholder="Message payload" rows={3} className="w-full bg-black/40 border border-neutral-800/80 rounded px-3 py-2 font-mono text-xs text-neutral-200 outline-none focus:border-cyan-400/60 shadow-[0_0_20px_rgba(0,255,255,0.25)]" />
         </form>
       ) : (
-        <div className="font-mono text-xs text-pink-300">
+        <div className="font-mono text-xs" style={{ color: '#FFC000' }}>
           Reply: 85ms latency acknowledged. Signal locked. Expect response channel within 1 business cycle.
         </div>
       )}
@@ -61,7 +62,7 @@ const ContactView = () => {
 };
 
 const TerminalCLI = ({ DetailComponent }) => {
-  const [view, setView] = useState('home'); // home | index | profile | contact | detail
+  const [view, setView] = useState('home'); // home | index | profile | contact | detail | monitor
   const [log, setLog] = useState([]);
   const handle = 'CYPHER-007';
 
@@ -80,23 +81,24 @@ const TerminalCLI = ({ DetailComponent }) => {
 
   return (
     <section className="min-h-screen bg-black text-[#E0E0E0] relative">
-      <div className="absolute inset-0 opacity-[0.08]" style={{
+      <div className="absolute inset-0 opacity-30" style={{
         backgroundImage:
-          'repeating-linear-gradient(0deg, #fff 0 1px, transparent 1px 22px), repeating-linear-gradient(90deg, #fff 0 1px, transparent 1px 22px)'
+          'repeating-linear-gradient(0deg, rgba(255,255,255,0.06), rgba(255,255,255,0.06) 1px, transparent 1px, transparent 24px)'
       }} />
       <div className="relative z-10 max-w-5xl mx-auto px-6 py-10">
-        <div className="font-mono text-xs text-neutral-400 mb-4">C:\\USER\\$[{handle}]&gt;</div>
+        <div className="font-mono text-xs mb-4" style={{ color: '#FFC000', textShadow: '0 0 6px rgba(255,192,0,0.6), 0 0 10px rgba(0,255,255,0.4)'}}>C:\\USER\\$[{handle}]&gt;</div>
         <div className="grid md:grid-cols-3 gap-6 items-start">
           <div className="md:col-span-1 space-y-2">
-            <div className="font-mono text-sm text-neutral-300">Commands</div>
-            <button onClick={() => runCommand('ls -l', 'index')} className="block w-full text-left font-mono text-xs px-3 py-2 border border-neutral-800/80 rounded hover:border-cyan-400/60 hover:text-cyan-300 transition">ls -l</button>
-            <button onClick={() => runCommand('cat /profile.txt', 'profile')} className="block w-full text-left font-mono text-xs px-3 py-2 border border-neutral-800/80 rounded hover:border-cyan-400/60 hover:text-cyan-300 transition">cat /profile.txt</button>
-            <button onClick={() => runCommand('ping [TARGET_COMPANY]', 'contact')} className="block w-full text-left font-mono text-xs px-3 py-2 border border-neutral-800/80 rounded hover:border-cyan-400/60 hover:text-cyan-300 transition">ping [TARGET_COMPANY]</button>
+            <div className="font-mono text-sm" style={{ color: '#FFC000' }}>Commands</div>
+            <button onClick={() => runCommand('ls -l', 'index')} className="block w-full text-left font-mono text-xs px-3 py-2 border border-neutral-800/80 rounded hover:border-cyan-400/60 hover:text-cyan-300 transition shadow-[0_0_18px_rgba(0,255,255,0.3)]">ls -l</button>
+            <button onClick={() => runCommand('cat /profile.txt', 'profile')} className="block w-full text-left font-mono text-xs px-3 py-2 border border-neutral-800/80 rounded hover:border-cyan-400/60 hover:text-cyan-300 transition shadow-[0_0_18px_rgba(0,255,255,0.3)]">cat /profile.txt</button>
+            <button onClick={() => runCommand('ping [TARGET_COMPANY]', 'contact')} className="block w-full text-left font-mono text-xs px-3 py-2 border border-neutral-800/80 rounded hover:border-cyan-400/60 hover:text-cyan-300 transition shadow-[0_0_18px_rgba(0,255,255,0.3)]">ping [TARGET_COMPANY]</button>
+            <button onClick={() => runCommand('status -diag', 'monitor')} className="block w-full text-left font-mono text-xs px-3 py-2 border border-neutral-800/80 rounded hover:border-cyan-400/60 hover:text-cyan-300 transition shadow-[0_0_18px_rgba(0,255,255,0.3)]">status -diag</button>
           </div>
           <div className="md:col-span-2">
-            <div className="p-4 border border-neutral-800/80 rounded bg-black/40 min-h-[320px]">
+            <div className="p-4 border border-neutral-800/80 rounded bg-black/40 min-h-[320px] shadow-[0_0_24px_rgba(0,255,255,0.25)]">
               {view === 'home' && (
-                <div className="font-mono text-sm text-neutral-400">Select a command to begin.</div>
+                <div className="font-mono text-sm" style={{ color: '#FFC000' }}>Select a command to begin.</div>
               )}
               {view === 'loading' && (
                 <div className="font-mono text-sm text-cyan-300 animate-pulse">processing...</div>
@@ -106,6 +108,7 @@ const TerminalCLI = ({ DetailComponent }) => {
               )}
               {view === 'profile' && <ProfileView />}
               {view === 'contact' && <ContactView />}
+              {view === 'monitor' && <SystemMonitor />}
               {view === 'detail' && (
                 <div className="space-y-4">
                   <DetailComponent />

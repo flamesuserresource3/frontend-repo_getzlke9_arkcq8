@@ -34,19 +34,24 @@ const BootSequence = ({ onComplete }) => {
 
   return (
     <div className="fixed inset-0 bg-black text-[#E0E0E0] flex items-center justify-center z-[100]">
-      <div className="w-full max-w-xl px-6">
+      <div className="absolute inset-0 pointer-events-none" style={{
+        opacity: 0.3,
+        backgroundImage:
+          'repeating-linear-gradient(0deg, rgba(255,255,255,0.05), rgba(255,255,255,0.05) 1px, transparent 1px, transparent 24px)'
+      }} />
+      <div className="w-full max-w-xl px-6 relative z-10">
         <div className="text-center">
-          <p className="font-mono text-sm tracking-widest text-cyan-300 mb-4">
+          <p className="font-mono text-sm tracking-widest mb-4" style={{ color: '#FFC000', textShadow: '0 0 6px rgba(255,192,0,0.6), 0 0 10px rgba(0,255,255,0.4)'}}>
             {displayText}
           </p>
         </div>
-        <div className="w-full h-1.5 bg-neutral-800 rounded overflow-hidden">
+        <div className="w-full h-1.5 bg-neutral-800 rounded overflow-hidden shadow-[0_0_20px_rgba(0,255,255,0.25)]">
           <div
-            className="h-full bg-cyan-400 transition-all duration-75"
-            style={{ width: `${progress}%` }}
+            className="h-full transition-all duration-75"
+            style={{ width: `${progress}%`, backgroundColor: '#FFC000' }}
           />
         </div>
-        <div className="mt-3 text-[10px] font-mono text-neutral-400 flex justify-between">
+        <div className="mt-3 text-[10px] font-mono flex justify-between" style={{ color: '#FFC000' }}>
           <span>BOOT.SEQ</span>
           <span>{progress}%</span>
         </div>
